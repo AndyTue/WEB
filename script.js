@@ -63,3 +63,22 @@ function validarFormulario() {
     }
     return true;
 }
+
+// Agrega este código en tu archivo script.js
+document.addEventListener("DOMContentLoaded", function () {
+    const productForm = document.getElementById("product-form");
+
+    productForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Aquí puedes agregar lógica para enviar los datos al servidor
+        // Puedes usar fetch() o cualquier otra técnica para enviar datos al backend
+        // Ejemplo:
+        const formData = new FormData(productForm);
+        
+        // Agrega aquí la lógica para enviar formData al servidor
+
+        // Después de enviar los datos, puedes limpiar el formulario si es necesario
+        productForm.reset();
+    });
+});
