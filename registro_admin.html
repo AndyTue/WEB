@@ -43,30 +43,24 @@
                     <h2>Administrador</h2>
                 </div>
             </div>
-            <section id="dashboard" class="dashboard">
-                    <div class="col fondo-dots">
-                        <h3>Bienvenido</h3>
-                        <p><?= $fetch_profile['name']; ?></p>
-                        <a href="update_profile.php" class="btn">Actualizar perfil</a>
-                    </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_products; ?></h3>
-                        <p>Productos agregados</p>
-                        <a href="products.php" class="btn">ver productos</a>
-                    </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_admins; ?></h3>
-                        <p>Administradores</p>
-                        <a href="admin_accounts.php" class="btn">ver administradores</a>
-                    </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_users; ?></h3>
-                        <p>usuarios</p>
-                        <a href="users_accounts.php" class="btn">ver usuarios</a>
-                    </div>
+            <section id="registro-admin" class="registro-admin">
+                <div class="col fondo-dots registro-form">
+                    <form>
+                        <h3>Registro de Administrador</h3>
+                        <div class="box">
+                            <input type="text" name="username" required placeholder="Nombre de usuario" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+                        </div>
+                        <div class="box">
+                            <input type="password" name="pass" required placeholder="Contraseña" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+                        </div>
+                        <div class="box">
+                            <input type="password" name="cpass" required placeholder="Confirmar contraseña" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+                        </div>
+                        <div class="box">
+                            <input type="submit" value="Registrar ahora" class="btn" name="submit">
+                        </div>
+                    </form>
+                </div>
             </section>
         </section>
     </div>
