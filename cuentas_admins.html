@@ -43,33 +43,16 @@
                     <h2>Administrador</h2>
                 </div>
             </div>
-            <section id="productos" class="productos">
-                <div class="fila">
-
+            <section id="dashboard" class="dashboard">
                     <div class="col fondo-dots">
-                        <h3>Bienvenido</h3>
-                        <p><?= $fetch_profile['name']; ?></p>
+                        <strong>ID administrador:</strong> <span><?= $fetch_accounts['id']; ?></span>
+                        <br>
+                        <strong>Nombre del administrador:</strong> <span><?= $fetch_accounts['name']; ?></span>
+                        <br>
                         <a href="update_profile.php" class="btn">Actualizar perfil</a>
+                        <br>
+                        <a href="register_admin.php" class="btn">Registrar administrador</a>
                     </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_products; ?></h3>
-                        <p>Productos agregados</p>
-                        <a href="products.php" class="btn">ver productos</a>
-                    </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_admins; ?></h3>
-                        <p>Administradores</p>
-                        <a href="admin_accounts.php" class="btn">ver administradores</a>
-                    </div>
-
-                    <div class="col fondo-dots">
-                        <h3><?= $number_of_users; ?></h3>
-                        <p>usuarios</p>
-                        <a href="users_accounts.php" class="btn">ver usuarios</a>
-                    </div>
-                </div>
             </section>
         </section>
     </div>
