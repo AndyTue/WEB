@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="estilo.css">
+    <title>SneakerBoutique</title>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <div class="logo-titulo">
+                <a href="index.php">
+                    <i class="fa-regular fa-circle-dot"></i>
+                    <h1>SneakerBoutique</h1>
+                </a>
+                
+            </div>
+            <nav id="nav">
+            
+            </nav>
+            <div id="nav-responsive">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="contenedor-seccion">
+            <div class="fondo-seccion"></div>
+            <div class="header-seccion">
+
+                <div class="centro">
+                    <h2>Administrador</h2>
+                </div>
+            </div>
+            <section id="blog" class="blog">
+                <div class="formulario-login">
+                    <h3>Iniciar sesión</h3>
+                <form action="login.php" method="POST">
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" required>
+        
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+        
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+            </div>
+        </section>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
