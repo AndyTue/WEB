@@ -1028,3 +1028,47 @@ td {
     background-color: #0056b3;
 }
 
+/* cuentas admins */
+#cuentas {
+    display: flex;
+    flex-wrap: wrap; /* Ajusta el estilo para que los elementos se envuelvan cuando no haya suficiente espacio */
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+    overflow-x: auto; /* Puedes ajustar esto según tus necesidades */
+}
+
+#cuentas .col {
+    background-color: #fff; /* Fondo blanco para mejorar la legibilidad */
+    padding: 20px; /* Añadir espacio interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+    margin-bottom: 20px; /* Añadir espacio en la parte inferior */
+}
+
+#cuentas .col h3 {
+    line-height: 40px;
+    font-size: 20px; /* Ajusta el tamaño del texto según sea necesario */
+    color: #444;
+    margin-bottom: 15px;
+}
+
+#cuentas .col p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#cuentas .col .btn {
+    background-color: #ff6b01;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center; /* Añade centrado al texto dentro del botón */
+}
+
+#cuentas .col .btn:hover {
+    background-color: #ff4500;
+}

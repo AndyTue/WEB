@@ -18,9 +18,8 @@
             </div>
             <nav id="nav">
                 <a href="dashboard.html" class="selected">Inicio</a>
-                <a href="tienda.php" >Productos</a>
-                <a href="administradores.html">Administradores</a>
-                <a href="usuarios.html">Usuarios</a>
+                <a href="productos.html" >Productos</a>
+                <a href="registro_admin.html">Administradores</a>
                 <span id="close-responsive">
                     <i class="fa-solid fa-xmark"></i>
                 </span>
@@ -63,15 +62,138 @@
                     
                             <button type="submit">Agregar Producto</button>
                         </form>
+                        <div id="mensajeProductoAgregado" style="display: none;">Producto agregado exitosamente</div>
                     </section>
                 </div>
+                <h2 class="subtitulo-seccion">Productos agregados</h2>
+            
+            <section id="productos" class="productos">
+                <div class="fila">
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        <a href="producto1.php">
+                            <div class="contenido">
+                                <div class="fondo orange">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/air.png" alt="">
+                                <h2>Air Force 1 High'07</h2>
+                                <h2>$2,899</h2>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        
+                        <a href="producto2.html">
+                            <div class="contenido">
+                                <div class="fondo blue">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/hippie.png" alt="">
+                                <h2>Nike Space Hippie</h2>
+                                <h2>$2,300</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        
+                        <a href="#">
+                            <div class="contenido">
+                                <div class="fondo green">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/jordan.png" alt="">
+                                <h2>Air Jordan 1 Hihg</h2>
+                                <h2>$4,599</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="fila">
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        
+                        <a href="#">
+                            <div class="contenido">
+                                <div class="fondo green">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/blazer.png" alt="">
+                                <h2>Nike Blazer Mid'77 Vintage</h2>
+                                <h2>$2,599</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        
+                        <a href="#">
+                            <div class="contenido">
+                                <div class="fondo orange">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/crater.png" alt="">
+                                <h2>Nike Crater Impact</h2>
+                                <h2>$2,300</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col fondo-dots">
+                        <header>
+                            <span class="like"><i class="fa-solid fa-heart"></i></span>
+                            <span class="cart"><i class="fa-solid fa-bag-shopping"></i></span>
+                        </header>
+                        
+                        <a href="#">
+                            <div class="contenido">
+                                <div class="fondo blue">
+                                    <div class="circulo"></div>
+                                </div>
+                                <img src="img/dunk.png" alt="">
+                                <h2>Nike Dunk Low Retro</h2>
+                                <h2>$2,600</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </section>
-                 
-                 </section>
             </section>
         </section>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var productForm = document.getElementById('product-form');
+            var mensajeProductoAgregado = document.getElementById('mensajeProductoAgregado');
+
+            productForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                mensajeProductoAgregado.style.display = 'block';
+
+                setTimeout(function () {
+                    window.location.href = 'dashboard.html';
+                }, 2000); // Puedes ajustar el tiempo según tus preferencias
+            });
+        });
+    </script>
 </body>
 </html>

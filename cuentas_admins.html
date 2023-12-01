@@ -18,8 +18,8 @@
             </div>
             <nav id="nav">
                 <a href="dashboard.html" class="selected">Inicio</a>
-                <a href="tienda.php" >Productos</a>
-                <a href="administradores.html">Administradores</a>
+                <a href="productos.html" >Productos</a>
+                <a href="registro_admin.html">Administradores</a>
                 <span id="close-responsive">
                     <i class="fa-solid fa-xmark"></i>
                 </span>
@@ -42,15 +42,13 @@
                     <h2>Administrador</h2>
                 </div>
             </div>
-            <section id="dashboard" class="dashboard">
+            <section id="cuentas" class="dashboard">
                     <div class="col fondo-dots">
-                        <strong>ID administrador:</strong> <span><?= $fetch_accounts['id']; ?></span>
+                        <strong>ID administrador:</strong> <span>1</span>
                         <br>
-                        <strong>Nombre del administrador:</strong> <span><?= $fetch_accounts['name']; ?></span>
+                        <strong>Nombre del administrador:</strong> <span>AndyTue</span>
                         <br>
-                        <a href="update_profile.php" class="btn">Actualizar perfil</a>
-                        <br>
-                        <a href="register_admin.php" class="btn">Registrar administrador</a>
+                        <a href="registro_admin.html" class="btn">Registrar administrador</a>
                     </div>
             </section>
         </section>

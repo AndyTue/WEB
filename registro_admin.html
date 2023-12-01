@@ -18,8 +18,8 @@
             </div>
             <nav id="nav">
                 <a href="dashboard.html" class="selected">Inicio</a>
-                <a href="tienda.php" >Productos</a>
-                <a href="administradores.html">Administradores</a>
+                <a href="productos.html" >Productos</a>
+                <a href="registro_admin.html">Administradores</a>
                 <span id="close-responsive">
                     <i class="fa-solid fa-xmark"></i>
                 </span>
@@ -44,7 +44,7 @@
             </div>
             <section id="blog" class="blog">
                 <div class="formulario-login">
-                    <form action="registro-_admin.php" method="POST">
+                    <form id="registroForm" action="dashboard.html">
                         <label for="nombreAdmin">Nombre de administrador:</label>
                         <input type="text" id="nombreAdmin" name="nombreAdmin" required>
     
@@ -56,11 +56,30 @@
 
                         <button type="submit">Registrarse</button>
                     </form>
+                    <div id="mensajeRegistro" style="display: none;">Administrador registrado exitosamente</div>
                 </div>
             </section>
         </section>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var formulario = document.getElementById('registroForm');
+            var mensajeRegistro = document.getElementById('mensajeRegistro');
+    
+            formulario.addEventListener('submit', function (event) {
+                // Evitar que el formulario se envíe automáticamente
+                event.preventDefault();
+    
+                // Muestra el mensaje de registro
+                mensajeRegistro.style.display = 'block';
+    
+                // Simula la redirección al dashboard después de 2 segundos
+                setTimeout(function () {
+                    window.location.href = formulario.action;
+                }, 2000);
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
