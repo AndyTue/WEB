@@ -20,7 +20,6 @@
                 <a href="dashboard.html" class="selected">Inicio</a>
                 <a href="tienda.php" >Productos</a>
                 <a href="administradores.html">Administradores</a>
-                <a href="usuarios.html">Usuarios</a>
                 <span id="close-responsive">
                     <i class="fa-solid fa-xmark"></i>
                 </span>
@@ -40,25 +39,22 @@
                     <strong><span class="link-blanco">Administrador</span> / Inicio</strong>
                 </div>
                 <div class="centro">
-                    <h2>Administrador</h2>
+                    <h2>Registro / Administrador</h2>
                 </div>
             </div>
-            <section id="registro-admin" class="registro-admin">
-                <div class="col fondo-dots registro-form">
-                    <form>
-                        <h3>Registro de Administrador</h3>
-                        <div class="box">
-                            <input type="text" name="username" required placeholder="Nombre de usuario" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-                        </div>
-                        <div class="box">
-                            <input type="password" name="pass" required placeholder="Contraseña" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-                        </div>
-                        <div class="box">
-                            <input type="password" name="cpass" required placeholder="Confirmar contraseña" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-                        </div>
-                        <div class="box">
-                            <input type="submit" value="Registrar ahora" class="btn" name="submit">
-                        </div>
+            <section id="blog" class="blog">
+                <div class="formulario-login">
+                    <form action="registro-_admin.php" method="POST">
+                        <label for="nombreAdmin">Nombre de administrador:</label>
+                        <input type="text" id="nombreAdmin" name="nombreAdmin" required>
+    
+                        <label for="correo">Correo electrónico:</label>
+                        <input type="email" id="correo" name="correo" required>
+    
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" required>
+
+                        <button type="submit">Registrarse</button>
                     </form>
                 </div>
             </section>
