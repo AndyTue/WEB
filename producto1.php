@@ -19,27 +19,45 @@
             <nav id="nav">
                 <a href="index.php" class="selected">Inicio</a>
                 <a href="tienda.php">Tienda</a>
-              <!--   <a href="blog.html">Blog</a>-->
                 <a href="contacto.php">Contacto</a>
-                <a href="login.html">Iniciar sesión</a>
+                <a href="favoritos.php">Favoritos</a>
+                <!-- icono cerrar menu responsive -->
                 <span id="close-responsive">
                     <i class="fa-solid fa-xmark"></i>
                 </span>
             </nav>
+            <!-- Boton de login -->
+            <form action="login.php">
+                <button class="btn-longin">Iniciar Sesión</button>
+            </form>
+            <!-- icono menu responsive -->
             <div id="nav-responsive">
                 <i class="fa-solid fa-bars"></i>
             </div>
+
             <div class="carrito">
-                <span class="total-compra">$ 10,000.00</span>
                 <a href="carrito.php">
                     <span class="icono-carrito">
                         <i class="fa-solid fa-bag-shopping"></i>
+                        <?php
+                        // Inicializar el contador de productos en el carrito
+                        $cantidadProductos = 0;
+
+                        // Verificar si hay productos en el carrito
+                        if (!empty($_SESSION['tienda'])) {
+                            // Sumar la cantidad total de productos, incluyendo las cantidades de productos idénticos
+                            foreach ($_SESSION['tienda'] as $detalles) {
+                                $cantidadProductos += $detalles['cantidad'];
+                            }
+                        }
+                        ?>
                         <div class="total-item-carrito">
-                            2
+                            <?php echo $cantidadProductos; ?>
                         </div>
                     </span>
                 </a>
             </div>
+
         </header>
 
         <section class="contenedor-seccion">
