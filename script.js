@@ -83,5 +83,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Almacenar el token en sessionStorage al iniciar sesión
+function guardarToken(token) {
+    sessionStorage.setItem('token', token);
+}
+
+// Obtener el token almacenado en sessionStorage
+function obtenerToken() {
+    return sessionStorage.getItem('token');
+}
+
+// Eliminar el token almacenado en sessionStorage al cerrar sesión
+function eliminarToken() {
+    sessionStorage.removeItem('token');
+}
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const botonSesion = document.getElementById('botonSesion');
+
+    // Verificar si hay un token almacenado
+    if (sessionStorage.getItem('token')) {
+        botonSesion.textContent = 'Cerrar Sesión'; // Cambiar texto del botón
+        // Asignar una función al botón para cerrar sesión
+        botonSesion.addEventListener('click', function() {
+            // Eliminar el token al hacer clic en "Cerrar Sesión"
+            sessionStorage.removeItem('token');
+            // Luego, redirigir o ejecutar otras acciones necesarias
+            // window.location.href = 'tuPaginaDeInicio.html';
+        });
+    } else {
+        // Si no hay token, asignar función para iniciar sesión
+        botonSesion.addEventListener('click', function() {
+            // Aquí puedes escribir la lógica para iniciar sesión y guardar el token
+            // guardarToken('tuTokenAquí');
+            sessionStorage.setItem('token', 'tuTokenAquí');
+            botonSesion.textContent = 'Cerrar Sesión'; // Cambiar texto del botón
+        });
+    }
+});
