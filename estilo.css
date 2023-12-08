@@ -9,18 +9,6 @@
 
 /* Login */
 
-.btn-longin{
-    background-color: #fdc10e;
-    color: #000;
-    font-size: 13px;
-    font-weight: bold;
-    border: none;
-    padding: 1%;
-    border-radius: 8px;
-    margin: 5px;
-    cursor: pointer;
-}
-
 .formulario-login {
     margin: 20px auto;
     max-width: 400px;
@@ -355,6 +343,7 @@ body{
     border: 3px solid #ffebc1;
     border-radius: 50%;
 }
+
 
 /* ****************** */
 /* DETALLER PRODUCTO */
@@ -948,6 +937,20 @@ td {
     background-color: #ff4500;
 }
 
+.btn-eliminar-prod {
+    background-color: #ff6b01;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: block; /* Asegura que el botón sea un bloque para poder centrarlo */
+    margin: 0 auto; /* Centra el bloque horizontalmente */
+    max-width: 200px; /* Establece un ancho máximo para evitar que sea demasiado ancho en pantallas grandes */
+}
+
 /* dashboard */ 
 
 .dashboard {
@@ -1084,3 +1087,27 @@ td {
 #cuentas .col .btn:hover {
     background-color: #ff4500;
 }
+
+
+/* Agrega estos estilos al final de tu archivo estilo.css o en el encabezado del HTML */
+.productos .fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre los productos */
+}
+
+.productos .col {
+    width: calc(33.33% - 20px); /* Ancho del 33.33% y resta el espacio entre los productos */
+    box-sizing: border-box;
+    position: relative;
+}
+
+.productos .contenido {
+    position: relative;
+}
+
+.productos .contenido h2 {
+    margin-top: 10px; /* Ajusta el margen superior del nombre del producto según sea necesario */
+}
+
+/* Ajusta estos estilos según tus preferencias */
