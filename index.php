@@ -122,6 +122,10 @@
                 }
                 ?>
             </div>
+            <!-- Mensaje de no hay productos relacionados -->
+            <div class="subtitulo-seccion" id="mensajeNoProductos" style="display: none;">
+                <p>Lo sentimos, no hay productos relacionados.</p>
+            </div>
         </section>
         </section>
     </div>
@@ -136,6 +140,12 @@
         // Obtener la lista de productos
         var productos = document.getElementsByClassName('producto');
 
+        // Obtener el elemento del mensaje
+        var mensajeNoProductos = document.getElementById('mensajeNoProductos');
+
+        // Inicializar una variable para rastrear si se encuentra algún producto
+        var seEncontroProducto = false;
+
         // Iterar sobre los productos y mostrar/ocultar según la palabra clave
         for (var i = 0; i < productos.length; i++) {
             var nombreProducto = productos[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
@@ -143,12 +153,17 @@
             // Verificar si la palabra clave está presente en el nombre del producto
             if (nombreProducto.includes(palabraClave)) {
                 productos[i].style.display = 'block';  // Mostrar el producto
+                seEncontroProducto = true;
             } else {
                 productos[i].style.display = 'none';   // Ocultar el producto
             }
         }
+
+        // Mostrar u ocultar el mensaje según si se encontró algún producto
+        mensajeNoProductos.style.display = seEncontroProducto ? 'none' : 'block';
     }
     </script>
+
 
 </body>
 </html>
