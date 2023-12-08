@@ -70,10 +70,11 @@
                 <div class="col">
                     <h2 class="titulo-inicio">Encuentra las zapatillas <br>
                         que buscas al mejor precio</h2>
-                    <div class="buscador">
-                        <input type="text" placeholder="Qué estas buscando?">
-                        <span class="btn-buscar"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    </div>
+                        <div class="buscador">
+                            <input type="text" id="inputBusqueda" placeholder="Qué estás buscando?">
+                            <span class="btn-buscar" onclick="buscarProductos()"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        </div>
+
                    
                 </div>
                 <div class="col derecha">
@@ -97,7 +98,7 @@
                     // Recorrer los resultados y mostrar cada producto
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <div class="col fondo-dots">
+                        <div class="col fondo-dots producto">
                             <header>
                                 <span class="like"><a href="favoritos.php?producto=<?php echo $row['id']; ?>"><i class="fa-solid fa-heart"></i></a></span>
                                 <span class="cart"><a href="carrito.php?producto=<?php echo $row['id']; ?>"><i class="fa-solid fa-bag-shopping"></i></a></span>
@@ -126,6 +127,28 @@
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+    function buscarProductos() {
+        // Obtener el valor ingresado en el campo de búsqueda
+        var palabraClave = document.getElementById('inputBusqueda').value.toLowerCase();
+
+        // Obtener la lista de productos
+        var productos = document.getElementsByClassName('producto');
+
+        // Iterar sobre los productos y mostrar/ocultar según la palabra clave
+        for (var i = 0; i < productos.length; i++) {
+            var nombreProducto = productos[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+
+            // Verificar si la palabra clave está presente en el nombre del producto
+            if (nombreProducto.includes(palabraClave)) {
+                productos[i].style.display = 'block';  // Mostrar el producto
+            } else {
+                productos[i].style.display = 'none';   // Ocultar el producto
+            }
+        }
+    }
+    </script>
+
 </body>
 </html>
-
