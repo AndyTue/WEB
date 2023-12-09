@@ -1,24 +1,19 @@
-<?php
-
-session_start();
-?>
-
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="estilo.css">
-    <title>SneakerBoutique</title>
-</head>
-<body>
-<div class="contenedor">
-    <?php
-    include 'header.php';
-    ?>
-    <section class="contenedor-seccion">
-        <div class="fondo-seccion"></div>
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="estilo.css">
+        <title>SneakerBoutique</title>
+    </head>
+    <body>
+    <div class="contenedor">
+        <?php
+        include 'header.php';
+        ?>
+        <section class="contenedor-seccion">
+            <div class="fondo-seccion"></div>
             <div class="header-seccion">
                 <div class="col">
                     <strong><span class="link-blanco">Inicio</span> / Iniciar sesión</strong>
@@ -40,14 +35,14 @@ session_start();
                         <button type="submit">Iniciar sesión</button>
                         <p>¿No tienes una cuenta? <a href="registro.php">Registrarte</a></p>
                     </form>
-            </div>
+                </div>
+            </section>
         </section>
-    </section>
-</div>
+    </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+    <script src="script.js"></script>
+    </body>
+    </html>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require("conection.php"); // Asegúrate de tener la conexión a la base de datos

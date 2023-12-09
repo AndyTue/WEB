@@ -1,15 +1,3 @@
-<?php
-
-session_start();
-
-if (isset($_SESSION['usuario'])) {
-    $usuario = $_SESSION['usuario'];
-} else {
-    $usuario = null;
-}
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +13,7 @@ if (isset($_SESSION['usuario'])) {
     <?php
     include 'header.php';
     ?>
+
     <section class="contenedor-seccion">
         <div class="fondo-seccion"></div>
         <div class="header-seccion">
@@ -48,7 +37,8 @@ if (isset($_SESSION['usuario'])) {
                     <input type="password" id="contrasena" name="contrasena" required>
 
                     <button type="submit">Registrarse</button>
-                    <p>¿Ya tienes una cuenta? <a href="../Proyecto/login.php">Iniciar sesión</a></p>
+                    <p>¿Ya tienes una cuenta? <a href="login.php">Iniciar sesión</a></p>
+
                 </form>
             </div>
         </section>
@@ -60,18 +50,17 @@ if (isset($_SESSION['usuario'])) {
 </html>
 
 <?php
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require("conection.php");
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-// Recuperar datos del formulario
+    // Recuperar datos del formulario
     $usuario = $_POST['nombreUsuario'];
     $contrasena = $_POST['contrasena'];
     $correo = $_POST['correo'];
 
-// Verifica si existe usuario y correo
+    // Verifica si existe usuario y correo
     $sqlCheck = "SELECT * FROM usuarios WHERE correo = ? OR usuario = ?";
     $stmt = $conn->prepare($sqlCheck);
     $stmt->bind_param("ss", $correo, $usuario);
@@ -99,7 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sss", $usuario, $contrasena, $correo);
 
         if ($stmt->execute()) {
-            echo "Registro exitoso. <a href='../Proyecto/login.php'>Iniciar sesión</a>";
+            echo '<script>';
+            echo 'alert("Registro exitoso");';
+            echo 'window.location.href = "login.php";'; // Redirigir a login.php después del registro exitoso
+            echo '</script>';
         } else {
             echo '<script>';
             echo 'alert("Error al registrar usuario.")';

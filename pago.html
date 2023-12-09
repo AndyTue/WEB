@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="estilo.css">
+    <title>SneakerBoutique</title>
+
+    <style>
+        /*PAGO */
+
+        .formulario-pago {
+            margin: 20px auto;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .formulario-pago h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .formulario-pago label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .formulario-pago input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .formulario-pago button {
+            background-color: #ff6b01;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="contenedor">
+        <!-- ENCABEZADO PRINCIPAL: LOGO MENU CARRITO -->
+        <?php
+    include 'header.php';
+    ?>
+
+        <section class="contenedor-seccion">
+            <div class="fondo-seccion"></div>
+            <div class="header-seccion">
+                <div class="col">
+                    <strong><span class="link-blanco">Inicio</span> / Carrito</strong>
+                </div>
+                <div class="centro">
+                    <h2>Pagar</h2>
+                </div>
+            </div>
+            <section id="blog" class="blog">
+                <div class="formulario-login">
+                    <h3>Completar compra</h3>
+                    <form id="formularioPago" action="index.php" method="post">
+                        <label for="nombre">Nombre y Apellidos:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+
+                        <label for="telefono">Número de Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+
+                        <label for="correo">Correo Electrónico:</label>
+                        <input type="email" id="correo" name="correo" required>
+
+                        <label for="tarjeta">Número de Tarjeta:</label>
+                        <input type="text" id="tarjeta" name="tarjeta" pattern="[0-9]{13,16}" required>
+                        <!-- Se recomienda el uso de pattern="[0-9]{13,16}" para validar números de tarjeta de 13 a 16 dígitos -->
+
+                        <label for="expiracion">Fecha de Expiración:</label>
+                        <input type="month" id="expiracion" name="expiracion" required>
+                        <!-- Se puede usar un campo de tipo 'month' para la fecha de expiración -->
+
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" pattern="[0-9]{3,4}" required>
+                        <!-- Se recomienda el uso de pattern="[0-9]{3,4}" para validar CVV de 3 o 4 dígitos -->
+
+                        <label for="ciudad">Ciudad:</label>
+                        <input type="text" id="ciudad" name="ciudad" required>
+
+                        <label for="estado">Estado:</label>
+                        <input type="text" id="estado" name="estado" required>
+
+                        <label for="codigoPostal">Código Postal:</label>
+                        <input type="text" id="codigoPostal" name="codigoPostal" pattern="[0-9]{5}" required>
+                        <!-- Se recomienda el uso de pattern="[0-9]{5}" para validar códigos postales de 5 dígitos -->
+
+                        <button type="submit" class="btn-pagar">Pagar</button>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </div>
+    <script src="script.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const formularioPago = document.getElementById('formularioPago');
+
+            if (formularioPago) {
+                formularioPago.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    // Realizar alguna lógica de procesamiento del formulario si es necesario
+
+                    // Mostrar mensaje de compra exitosa
+                    alert('¡Compra exitosa! Gracias por tu compra.');
+
+                    // Redirigir a index.php después de 2 segundos (2000 milisegundos)
+
+                        window.location.href = 'index.php';
+
+                });
+            }
+        });
+    </script>
+</body>
+</html>

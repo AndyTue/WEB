@@ -1,5 +1,5 @@
 <?php
-session_start(); // Inicializar la sesión si no lo has hecho ya
+
 
 // Función para verificar si el usuario ha iniciado sesión
 function usuarioAutenticado() {

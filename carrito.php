@@ -1,17 +1,91 @@
 <?php
-include 'db_connection.php';
 session_start();
-// Define un arreglo asociativo con los nombres de visualización correspondientes a cada producto
-$nombresVisualizacion = array(
-    'tenis1' => 'Air Force 1 High´07',
-    'tenis2' => 'Nike Space Hippie',
-    'tenis3' => 'Air Jordan 1 Hihg',
-    'tenis4' => 'Nike Blazer Mid´77 Vintage',
-    'tenis5' => 'Nike Crater Impact',
-    'tenis6' => 'Nike Dunk Low Retro'
-    // Agrega más productos según sea necesario
-);
+include 'db_connection.php';
+
+// Función para obtener la información del producto desde la base de datos
+function obtenerInfoProductoDesdeBD($producto) {
+    global $conn;
+
+    // Consulta SQL para obtener la información del producto
+    $sql = "SELECT name, price FROM tenis_snk WHERE id = '$producto'";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        return $result->fetch_assoc();
+    } else {
+        return array();
+    }
+}
+
+// Función para obtener la URL de la imagen específica para cada producto
+function obtenerUrlImagen($conn, $producto) {
+    // Consultar la base de datos para obtener el nombre de la imagen
+    $query = "SELECT image FROM tenis_snk WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $producto);
+    $stmt->execute();
+    $stmt->bind_result($imagen);
+
+    if ($stmt->fetch()) {
+        $stmt->close();
+        // Retornar la URL de la imagen
+        return 'img/' . $imagen;
+    } else {
+        echo "Error al obtener la URL de la imagen: " . $stmt->error;
+        return '';
+    }
+}
+
+// Verificar si se proporciona el parámetro 'aumentar' y es válido
+if (isset($_GET['aumentar'])) {
+    $productoAumentar = $_GET['aumentar'];
+    $_SESSION['tienda'][$productoAumentar]['cantidad']++;
+    header('Location: carrito.php');
+}
+
+// Verificar si se proporciona el parámetro 'reducir' y es válido
+if (isset($_GET['reducir'])) {
+    $productoReducir = $_GET['reducir'];
+    $_SESSION['tienda'][$productoReducir]['cantidad']--;
+
+    // Si la cantidad es 0 o menos, eliminar el producto del carrito
+    if ($_SESSION['tienda'][$productoReducir]['cantidad'] <= 0) {
+        unset($_SESSION['tienda'][$productoReducir]);
+    }
+
+    header('Location: carrito.php');
+}
+
+// Verificar si se proporciona el parámetro 'eliminar' y es válido
+if (isset($_GET['eliminar'])) {
+    $productoEliminar = $_GET['eliminar'];
+
+    // Eliminar el producto del carrito
+    unset($_SESSION['tienda'][$productoEliminar]);
+}
+
+// Verificar si se proporciona el parámetro 'pagar' y es válido
+if (isset($_POST['pagoRealizado']) && $_POST['pagoRealizado'] === 'true') {
+    // Aquí puedes realizar cualquier lógica relacionada con el pago, como registrar la transacción en la base de datos, enviar correos electrónicos, etc.
+
+    // Después de completar la transacción, vaciar el carrito
+    $_SESSION['tienda'] = array();
+}
+// Verificar si se proporciona el parámetro 'producto' y es válido
+if (isset($_GET['producto'])) {
+    $productoAgregar = $_GET['producto'];
+
+    // Verificar si el producto ya está en el carrito
+    if (isset($_SESSION['tienda'][$productoAgregar])) {
+        // Si está en el carrito, incrementar la cantidad
+        $_SESSION['tienda'][$productoAgregar]['cantidad']++;
+    } else {
+        // Si no está en el carrito, agregarlo con cantidad 1
+        $_SESSION['tienda'][$productoAgregar] = array('cantidad' => 1);
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,6 +100,7 @@ $nombresVisualizacion = array(
     <?php
     include 'header.php';
     ?>
+
     <section class="contenedor-seccion">
         <div class="fondo-seccion"></div>
         <div class="header-seccion">
@@ -44,98 +119,7 @@ $nombresVisualizacion = array(
         <section class="mi-carrito">
             <div class="productos-carrito">
                 <?php
-                // Comprobar si la sesión no está iniciada antes de intentar iniciarla
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-
-
-
-                // Verificar si se proporciona el parámetro 'producto' y es válido
-                if (isset($_GET['producto'])) {
-                    $producto = $_GET['producto'];
-
-                    // Verificar si la variable de sesión específica para el producto existe
-                    if (!isset($_SESSION['tienda'][$producto])) {
-                        // Agregar el producto con cantidad 1 y precio
-                        $_SESSION['tienda'][$producto] = array('cantidad' => 1, 'precio' => obtenerPrecioPorProducto($producto));
-                    } else {
-                        // Incrementar la cantidad del producto
-                        $_SESSION['tienda'][$producto]['cantidad']++;
-                    }
-
-                    // Redirigir después de agregar el producto para evitar repetir la acción al actualizar
-                    header('Location: carrito.php');
-                    exit;
-                }
-
-                // Verificar si se proporciona el parámetro 'eliminar' y es válido
-                if (isset($_GET['eliminar'])) {
-                    $productoEliminar = $_GET['eliminar'];
-
-                    // Verificar si la variable de sesión específica para el producto existe
-                    if (isset($_SESSION['tienda'][$productoEliminar])) {
-                        // Eliminar definitivamente el producto
-                        unset($_SESSION['tienda'][$productoEliminar]);
-
-                        // Redirigir después de eliminar el producto para evitar repetir la acción al actualizar
-                        header('Location: carrito.php');
-                        exit;
-                    }
-                }
-
-                // Verificar si se proporciona el parámetro 'aumentar' y es válido
-                if (isset($_GET['aumentar'])) {
-                    $productoAumentar = $_GET['aumentar'];
-
-                    // Verificar si la variable de sesión específica para el producto existe
-                    if (isset($_SESSION['tienda'][$productoAumentar])) {
-                        // Aumentar la cantidad del producto
-                        $_SESSION['tienda'][$productoAumentar]['cantidad']++;
-
-                        // Redirigir después de aumentar el producto para evitar repetir la acción al actualizar
-                        header('Location: carrito.php');
-                        exit;
-                    }
-                }
-
-                // Verificar si se proporciona el parámetro 'reducir' y es válido
-                if (isset($_GET['reducir'])) {
-                    $productoReducir = $_GET['reducir'];
-
-                    // Verificar si la variable de sesión específica para el producto existe
-                    if (isset($_SESSION['tienda'][$productoReducir])) {
-                        // Reducir la cantidad del producto
-                        $_SESSION['tienda'][$productoReducir]['cantidad']--;
-
-                        // Eliminar el producto si la cantidad llega a cero o menos
-                        if ($_SESSION['tienda'][$productoReducir]['cantidad'] <= 0) {
-                            unset($_SESSION['tienda'][$productoReducir]);
-                        }
-
-                        // Redirigir después de reducir el producto para evitar repetir la acción al actualizar
-                        header('Location: carrito.php');
-                        exit;
-                    }
-                }
-
-                // Función para obtener el precio por producto
-                function obtenerPrecioPorProducto($producto) {
-                    // Define un arreglo asociativo con los precios de cada producto
-                    $precios = array(
-                        'tenis1' => 270,
-                        'tenis2' => 319,
-                        'tenis3' => 134,
-                        'tenis4' => 179,
-                        'tenis5' => 190,
-                        'tenis6' => 134
-                    );
-
-                    // Retorna el precio correspondiente al producto
-                    return isset($precios[$producto]) ? $precios[$producto] : 0;
-                }
-
-                // Verificar si se oprimió el botón de Pagar y si hay productos en el carrito
+                // Verificar si hay productos en el carrito
                 if (!empty($_SESSION['tienda'])) {
                     echo "<table class='carrito-table'>";
                     echo "<thead>";
@@ -151,36 +135,42 @@ $nombresVisualizacion = array(
                     $total = 0;
 
                     foreach ($_SESSION['tienda'] as $producto => $detalles) {
-                        echo "<tr>";
-                        // Descripción e Imagen
-                        echo "<td>";
-                        echo "<div class='descripcion-imagen'>";
-                        echo "<img src='" . obtenerNombreImagen($producto) . "' alt='{$producto}' class='imagen-producto'>";
-                        echo "<span>{$nombresVisualizacion[$producto]}</span>";
-                        echo "</div>";
-                        echo "</td>";
+                        // Obtener la información del producto desde la base de datos
+                        $productoInfo = obtenerInfoProductoDesdeBD($producto);
 
+                        // Verificar si se obtuvo información del producto
+                        if (!empty($productoInfo)) {
+                            echo "<tr>";
+                            // Descripción e Imagen
+                            echo "<td>";
+                            echo "<div class='descripcion-imagen'>";
+                            echo "<img src='" . obtenerUrlImagen($conn, $producto) . "' alt='{$producto}' class='imagen-producto'>";
+                            echo "<span>{$productoInfo['name']}</span>";
+                            echo "</div>";
+                            echo "</td>";
 
-                        // Cantidad
-                        echo "<td>";
-                        // Aumentar
-                        echo "<a class='aumentar' href='carrito.php?aumentar=$producto'>+</a>";
-                        echo " {$detalles['cantidad']}";
-                        // Reducir
-                        echo "<a class='reducir' href='carrito.php?reducir=$producto'>-</a>";
-                        echo "</td>";
+                            // Cantidad
+                            echo "<td>";
+                            // Aumentar
+                            echo "<a class='aumentar' href='carrito.php?aumentar={$producto}'>+</a>";
+                            echo " {$detalles['cantidad']}";
+                            // Reducir
+                            echo "<a class='reducir' href='carrito.php?reducir={$producto}'>-</a>";
+                            echo "</td>";
 
-                        // Eliminar
-                        echo "<td><a class='eliminar' href='carrito.php?eliminar=$producto'>x</a></td>";
+                            // Eliminar
+                            echo "<td><a class='eliminar' href='carrito.php?eliminar={$producto}'>x</a></td>";
 
-                        // Precio
-                        echo "<td>{$detalles['precio']}</td>";
+                            // Precio desde la base de datos
+                            $precioDesdeBD = $productoInfo["price"];
+                            echo "<td>{$precioDesdeBD}</td>";
 
-                        echo "</tr>";
+                            echo "</tr>";
 
-                        // Calcular el total
-                        $subtotal = $detalles['cantidad'] * $detalles['precio'];
-                        $total += $subtotal;
+                            // Calcular el total
+                            $subtotal = $detalles['cantidad'] * $productoInfo["price"];
+                            $total += $subtotal;
+                        }
                     }
 
                     echo "</tbody>";
@@ -190,40 +180,15 @@ $nombresVisualizacion = array(
                     echo "<div class='finalizar-compra'>";
                     echo "<h3>Total Compra:</h3>";
                     echo "<div class='monto'>$$total</div>";
-                    echo "<button class='btn-pagar' onclick=\"location.href='login.php'\">Pagar</button>";
-                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn-pagar'])) {
-                        // Verificar si se presionó el botón y ejecutar una función o código aquí
-                    }
-
-
+                    echo "<form id='formularioPago' action='carrito.php' method='post'>";
+                    echo "<input type='hidden' name='pagoRealizado' value='true'>";
+                    echo "<button type='submit' class='btn-pagar'>Pagar</button>";
+                    echo "</form>";
                     echo "</div>";
                 } else {
                     echo "<p>No hay productos en el carrito.</p>";
                 }
-
-
-
-
-                // Función para obtener el nombre de la imagen específica para cada producto
-                function obtenerNombreImagen($producto) {
-                    // Ruta de la carpeta de imágenes
-                    $rutaCarpeta = 'img/';
-                    // Puedes mantener un array asociativo con los nombres de las imágenes correspondientes a cada producto
-                    $imagenes = array(
-                        'tenis1' => 'air.png',
-                        'tenis2' => 'hippie.png',
-                        'tenis3' => 'jordan.png',
-                        'tenis4' => 'blazer.png',
-                        'tenis5' => 'crater.png',
-                        'tenis6' => 'dunk.png',
-                        // Agrega más productos según sea necesario
-                    );
-
-                    // Retorna el nombre de la imagen correspondiente al producto
-                    return isset($imagenes[$producto]) ? $rutaCarpeta . $imagenes[$producto] : '';
-                }
                 ?>
-
 
 
         </section>

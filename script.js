@@ -6,15 +6,15 @@ function setMini(pos){
 
     if(pos=='0'){
         imgProducto.style.transform = "rotateZ(0deg)";
-       
+
     }
     if(pos=='1'){
         imgProducto.style.transform = "rotateZ(35deg)";
-        
+
     }
     if(pos=='2'){
         imgProducto.style.transform = "rotateZ(-55deg) scale(0.75)";
-       
+
     }
 
     miniaturas[0].style.backgroundColor = "#fff1d9";
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Puedes usar fetch() o cualquier otra técnica para enviar datos al backend
         // Ejemplo:
         const formData = new FormData(productForm);
-        
+
         // Agrega aquí la lógica para enviar formData al servidor
 
         // Después de enviar los datos, puedes limpiar el formulario si es necesario

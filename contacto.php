@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,6 +13,7 @@
         <?php
         include 'header.php';
         ?>
+
 
         <section class="contenedor-seccion">
             <div class="fondo-seccion"></div>
