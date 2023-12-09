@@ -6,15 +6,15 @@ function setMini(pos){
 
     if(pos=='0'){
         imgProducto.style.transform = "rotateZ(0deg)";
-       
+
     }
     if(pos=='1'){
         imgProducto.style.transform = "rotateZ(35deg)";
-        
+
     }
     if(pos=='2'){
         imgProducto.style.transform = "rotateZ(-55deg) scale(0.75)";
-       
+
     }
 
     miniaturas[0].style.backgroundColor = "#fff1d9";
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Puedes usar fetch() o cualquier otra técnica para enviar datos al backend
         // Ejemplo:
         const formData = new FormData(productForm);
-        
+
         // Agrega aquí la lógica para enviar formData al servidor
 
         // Después de enviar los datos, puedes limpiar el formulario si es necesario
@@ -83,5 +83,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Almacenar el token en sessionStorage al iniciar sesión
+function guardarToken(token) {
+    sessionStorage.setItem('token', token);
+}
+
+// Obtener el token almacenado en sessionStorage
+function obtenerToken() {
+    return sessionStorage.getItem('token');
+}
+
+// Eliminar el token almacenado en sessionStorage al cerrar sesión
+function eliminarToken() {
+    sessionStorage.removeItem('token');
+}
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const botonSesion = document.getElementById('botonSesion');
+
+    // Verificar si hay un token almacenado
+    if (sessionStorage.getItem('token')) {
+        botonSesion.textContent = 'Cerrar Sesión'; // Cambiar texto del botón
+        // Asignar una función al botón para cerrar sesión
+        botonSesion.addEventListener('click', function() {
+            // Eliminar el token al hacer clic en "Cerrar Sesión"
+            sessionStorage.removeItem('token');
+            // Luego, redirigir o ejecutar otras acciones necesarias
+            // window.location.href = 'tuPaginaDeInicio.html';
+        });
+    } else {
+        // Si no hay token, asignar función para iniciar sesión
+        botonSesion.addEventListener('click', function() {
+            // Aquí puedes escribir la lógica para iniciar sesión y guardar el token
+            // guardarToken('tuTokenAquí');
+            sessionStorage.setItem('token', 'tuTokenAquí');
+            botonSesion.textContent = 'Cerrar Sesión'; // Cambiar texto del botón
+        });
+    }
+});

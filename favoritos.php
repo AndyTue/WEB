@@ -1,14 +1,12 @@
 <?php
-include 'db_connection.php';
-
-// Iniciar sesión
 session_start();
+include 'db_connection.php';
 
 // Función para obtener la URL de la imagen específica para cada producto
 function obtenerUrlImagen($conn, $producto) {
     // Ruta de la carpeta de imágenes
     $rutaCarpeta = 'img/';
-    
+
     // Consultar la base de datos para obtener el nombre de la imagen
     $query = "SELECT image FROM tenis_snk WHERE id = ?";
     $stmt = $conn->prepare($query);
@@ -97,119 +95,73 @@ if (isset($_GET['agregarAlCarrito'])) {
     <title>SneakerBoutique - Favoritos</title>
 </head>
 <body>
-    <div class="contenedor">
-        <header>
-        <div class="logo-titulo">
-                <a href="index.php">
-                    <i class="fa-regular fa-circle-dot"></i>
-                    <h1>SneakerBoutique</h1>
-                </a>
-            </div>
-            <nav id="nav">
-                <a href="index.php" class="selected">Inicio</a>
-                <a href="tienda.php">Tienda</a>
-                <!--   <a href="blog.html">Blog</a>-->
-                <a href="contacto.php">Contacto</a>
-                <a href="login.html">Iniciar sesión</a>
-                <a href="favoritos.php">Favoritos</a>
-                <!-- icono cerrar menu responsive -->
-                <span id="close-responsive">
-                    <i class="fa-solid fa-xmark"></i>
-                </span>
-            </nav>
-            <!-- icono menu responsive -->
-            <div id="nav-responsive">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-            <div class="carrito">
-                
-                <a href="carrito.php">
-                    <span class="icono-carrito">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <?php
-                            // Inicializar el contador de productos en el carrito
-                            $cantidadProductos = 0;
+<div class="contenedor">
+    <?php
+    include 'header.php';
+    ?>
 
-                            // Verificar si hay productos en el carrito
-                            if (!empty($_SESSION['tienda'])) {
-                                // Sumar la cantidad total de productos, incluyendo las cantidades de productos idénticos
-                                foreach ($_SESSION['tienda'] as $detalles) {
-                                    $cantidadProductos += $detalles['cantidad'];
-                                }
-                            }
-                        ?>
-                        <div class="total-item-carrito">
-                            <?php echo $cantidadProductos; ?>
-                        </div>
-                    </span>
-                </a>
+    <section class="contenedor-seccion">
+        <div class="fondo-seccion"></div>
+        <div class="header-seccion">
+            <div class="col">
+                <strong><span class="link-blanco">Inicio</span> / Carrito</strong>
             </div>
-        </header>
-
-        <section class="contenedor-seccion">
-            <div class="fondo-seccion"></div>
-            <div class="header-seccion">
-                <div class="col">
-                    <strong><span class="link-blanco">Inicio</span> / Carrito</strong>
-                </div>
-                <div class="centro">
-                    <h2>Mis Favoritos</h2>
-                </div>
-                <div class="col busqueda">
-                    
-                </div>
+            <div class="centro">
+                <h2>Mis Favoritos</h2>
             </div>
-            
+            <div class="col busqueda">
 
-            <section class="mi-carrito">
-                <div class="productos-carrito">
+            </div>
+        </div>
+
+
+        <section class="mi-carrito">
+            <div class="productos-carrito">
                 <?php
-                    // Verificar si hay productos en la lista de favoritos
-                    if (!empty($_SESSION['favoritos'])) {
-                        echo "<table class='carrito-table'>";
-                        echo "<thead>";
+                // Verificar si hay productos en la lista de favoritos
+                if (!empty($_SESSION['favoritos'])) {
+                    echo "<table class='carrito-table'>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th>Imagen</th>";
+                    echo "<th>Nombre</th>";
+                    echo "<th>Eliminar</th>";
+                    echo "<th>Añadir al Carrito</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+
+                    foreach ($_SESSION['favoritos'] as $producto => $detalles) {
                         echo "<tr>";
-                        echo "<th>Imagen</th>";
-                        echo "<th>Nombre</th>";
-                        echo "<th>Eliminar</th>";
-                        echo "<th>Añadir al Carrito</th>"; 
+                        // Imagen
+                        echo "<td>";
+                        echo "<img src='" . obtenerUrlImagen($conn, $producto) . "' alt='{$producto}' class='imagen-producto'>";
+                        echo "</td>";
+
+                        // Nombre
+                        echo "<td>";
+                        echo obtenerNombreProducto($conn, $producto);
+                        echo "</td>";
+
+                        // Eliminar
+                        echo "<td><a class='eliminar' href='favoritos.php?eliminar=$producto'>Eliminar</a></td>";
+
+                        // Añadir al Carrito
+                        echo "<td><a class='eliminar' href='favoritos.php?agregarAlCarrito=$producto'>Añadir al Carrito</a></td>";
+
                         echo "</tr>";
-                        echo "</thead>";
-                        echo "<tbody>";
-
-                        foreach ($_SESSION['favoritos'] as $producto => $detalles) {
-                            echo "<tr>";
-                            // Imagen
-                            echo "<td>";
-                            echo "<img src='" . obtenerUrlImagen($conn, $producto) . "' alt='{$producto}' class='imagen-producto'>";
-                            echo "</td>";
-
-                            // Nombre
-                            echo "<td>";
-                            echo obtenerNombreProducto($conn, $producto);
-                            echo "</td>";
-
-                            // Eliminar
-                            echo "<td><a class='eliminar' href='favoritos.php?eliminar=$producto'>Eliminar</a></td>";
-                            
-                            // Añadir al Carrito
-                            echo "<td><a class='eliminar' href='favoritos.php?agregarAlCarrito=$producto'>Añadir al Carrito</a></td>";
-
-                            echo "</tr>";
-                        }
-
-                        echo "</tbody>";
-                        echo "</table>";
-                    } else {
-                        echo "<p>No hay productos en la lista de favoritos.</p>";
                     }
-                    ?>
-                     </div>
-            </section>
+
+                    echo "</tbody>";
+                    echo "</table>";
+                } else {
+                    echo "<p>No hay productos en la lista de favoritos.</p>";
+                }
+                ?>
+            </div>
         </section>
+    </section>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-

@@ -7,7 +7,21 @@
     font-family: 'Open Sans';
 }
 
+
+
 /* Login */
+
+.btn-longin{
+    background-color: #fdc10e;
+    color: #000;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    padding: 1%;
+    border-radius: 8px;
+    margin: 5px;
+    cursor: pointer;
+}
 
 .formulario-login {
     margin: 20px auto;
@@ -152,10 +166,10 @@ body{
     width: 50%;
 }
 .contenedor-seccion .inicio .col .titulo-inicio{
-   line-height: 40px;
-   font-size: 30px;
-   color: #444;
-   margin-bottom: 15px;
+    line-height: 40px;
+    font-size: 30px;
+    color: #444;
+    margin-bottom: 15px;
 }
 .contenedor-seccion .inicio .col .buscador{
     width: 80%;
@@ -172,20 +186,20 @@ body{
     display: inline-block;
     padding: 10px;
     outline: none;
- }
- .contenedor-seccion .inicio .col .buscador span{
+}
+.contenedor-seccion .inicio .col .buscador span{
     width: 50px;
     height: 40px;
     line-height: 40px;
     cursor: pointer;
     cursor: pointer;
- }
- .contenedor-seccion .inicio .col .buscador span i{
+}
+.contenedor-seccion .inicio .col .buscador span i{
     padding-right: 10px;
- }
- .contenedor-seccion .inicio .col .buscador span:hover{
+}
+.contenedor-seccion .inicio .col .buscador span:hover{
     background-color:#ccc;
- }
+}
 
 .contenedor-seccion .inicio .col .contenedor-img{
     width: 220px;
@@ -278,12 +292,12 @@ body{
 .productos .fila .col .cart:hover{
     background-color: #fdc20c;
 }
-  
+
 /* ...or add this class to an element */
 .fondo-dots {
-    background-image: 
-        radial-gradient(rgb(226, 226, 226) 2%, transparent 10%),
-        radial-gradient(rgb(232, 227, 227) 2%, transparent 10%);
+    background-image:
+            radial-gradient(rgb(226, 226, 226) 2%, transparent 10%),
+            radial-gradient(rgb(232, 227, 227) 2%, transparent 10%);
     background-position: 0px 0px, 12px 12px;
     background-size: 24px 24px;
     background-color: rgb(255, 255, 255);
@@ -475,7 +489,7 @@ body{
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
-    
+
 }
 
 
@@ -483,7 +497,7 @@ body{
     color: #000;
     margin: 30px 0;
     text-align: center;
-    
+
 }
 /* ****************** */
 /* SECCION BLOG */
@@ -540,23 +554,23 @@ body{
     margin-right: 10px;
 }
 .blog .fila .col .contenido{
-   padding: 10px;
+    padding: 10px;
 }
 .blog .fila .col .contenido header{
     margin: 10px 0;
 }
 .blog .fila .col .contenido h2{
-   font-weight: normal;
-   margin-bottom: 20px;
-   font-size: 18px;
- }
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
 
- .blog .fila .col .contenido p{
-   margin-bottom: 20px;
+.blog .fila .col .contenido p{
+    margin-bottom: 20px;
 }
 .blog .fila .col .contenido a{
-   text-decoration: none;
-   color: #ff6b01;
+    text-decoration: none;
+    color: #ff6b01;
 }
 .blog .fila .col .contenido a:hover{
     text-decoration: underline;
@@ -580,7 +594,7 @@ body{
 }
 .contacto .fila .col{
     box-sizing: border-box;
-        width: 40%;
+    width: 40%;
 }
 .contacto .fila .col input,
 .contacto .fila .col textarea
@@ -628,7 +642,7 @@ body{
 .mi-carrito {
     position: relative;
     padding: 0 50px;
-    
+
 }
 .mi-carrito .productos-carrito{
     padding: 50px 40px;
@@ -705,7 +719,7 @@ body{
 }
 tr {
     border-bottom: solid black 1px;
-    
+
 }
 td {
     color: black;
@@ -745,7 +759,7 @@ td {
 #nav-responsive{
     font-size: 18px;
     display: none;
-    
+
 }
 #close-responsive{
     display: none;
@@ -879,14 +893,14 @@ td {
         display: block;
     }
     .mi-carrito .productos-carrito .fila  .descripcion img{
-       display: block;
+        display: block;
     }
     .mi-carrito .productos-carrito .fila .precio span{
         font-size: 16px;
     }
 }
 
-/* Añadir productos admin */ 
+/* Añadir productos admin */
 .add-products {
     margin: 20px auto; /* Centra el formulario en el eje horizontal */
     max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
@@ -951,7 +965,7 @@ td {
     max-width: 200px; /* Establece un ancho máximo para evitar que sea demasiado ancho en pantallas grandes */
 }
 
-/* dashboard */ 
+/* dashboard */
 
 .dashboard {
     display: flex;
@@ -967,9 +981,9 @@ td {
     margin: 0 10px;
     border-radius: 30px;
     position: relative;
-    background-image: 
-        radial-gradient(rgb(226, 226, 226) 2%, transparent 10%),
-        radial-gradient(rgb(232, 227, 227) 2%, transparent 10%);
+    background-image:
+            radial-gradient(rgb(226, 226, 226) 2%, transparent 10%),
+            radial-gradient(rgb(232, 227, 227) 2%, transparent 10%);
     background-position: 0px 0px, 12px 12px;
     background-size: 24px 24px;
     background-color: rgb(255, 255, 255);
@@ -1001,7 +1015,7 @@ td {
     background-color: #ff4500;
 }
 
-/* cuentas admins */ 
+/* cuentas admins */
 
 #admins.admins {
     background-color: #f2f2f2;
